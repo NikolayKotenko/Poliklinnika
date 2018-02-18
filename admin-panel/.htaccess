@@ -1,0 +1,5 @@
+
+#AuthType Basic
+#AuthName "Admin Panel"
+#AuthUserFile F:/OpenServer/domains/geekbrains-php-fast-start/admin-panel/.htpasswd
+#Require valid-user
