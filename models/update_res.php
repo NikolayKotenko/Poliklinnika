@@ -69,7 +69,7 @@ $link = db_connect();?>
                 }
 //                $result_end = mysqli_fetch_assoc($result);
 //                var_dump($result);
-                echo "polis_posle = " . $_POST['strahovoi_polis'];
+//                echo "polis_posle = " . $_POST['strahovoi_polis'];
 
 //                    }
                 ?>
