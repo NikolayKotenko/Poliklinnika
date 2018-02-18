@@ -15,9 +15,9 @@
 <div class="container">
     <h1>Мой первый бложик</h1>
     <div>
-        <pre>
-        <?php print_r($articles_table)  ?>
-        </pre>
+<!--        <pre>-->
+<!--        --><?php //print_r($articles_table)  ?>
+<!--        </pre>-->
         <a href="../views/form_add_new_article_admin-panel.php">Добавить статью</a> <!-- Ссылка скрытого пула) в файле admin-panel
         /index.php в обработке добавления статей - header("Location: index.php") - грубо говоря спец лейбл с параметром add -->
         <a href="../index.php">Главная страница со статьями</a>
@@ -35,6 +35,8 @@
                 <th>Дата выписки</th>
                 <th>Аллергия к препаратам</th>
                 <th>Назначенные препараты</th>
+                <th></th>
+                <th></th>
             </tr>
 
         <?php foreach ($articles_table as $a): ?> <!-- Проходимся по каждому элементу массива

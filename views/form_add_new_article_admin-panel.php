@@ -57,7 +57,7 @@
                 <input type="text" name="Отделение" value="<?=$post_null_get_article[$_GET['id']-1]['Отделение']?>" class="form-item" autofocus required>
             </label><br>
             <label>ФИО Лечащего врача
-                <input type="text" name="ФИО Лечащего врача" value="<?=$post_null_get_article[$_GET['id']-1]['ФИО Лечащего врача']?>" class="form-item" autofocus required>
+                <input type="text" name="ФИО_Лечащего_врача" value="<?=$post_null_get_article[$_GET['id']-1]['ФИО Лечащего врача']?>" class="form-item" autofocus required>
             </label><br>
             <label>Диагноз
                 <input type="text" name="Диагноз" value="<?=$post_null_get_article[$_GET['id']-1]['Диагноз']?>" class="form-item" autofocus required>
@@ -66,16 +66,16 @@
                 <input type="text" name="Симптом" value="<?=$post_null_get_article[$_GET['id']-1]['Симптом']?>" class="form-item" autofocus required>
             </label><br>
             <label>Дата поступления
-                <input type="date" name="Дата поступления" value="<?=$post_null_get_article[$_GET['id']-1]['Дата поступления']?>" class="form-item" autofocus required>
+                <input type="date" name="Дата_поступления" value="<?=$post_null_get_article[$_GET['id']-1]['Дата поступления']?>" class="form-item" autofocus required>
             </label><br>
             <label>Дата выписки
-                <input type="date" name="Дата выписки" value="<?=$post_null_get_article[$_GET['id']-1]['Дата выписки']?>" class="form-item" autofocus required>
+                <input type="date" name="Дата_выписки" value="<?=$post_null_get_article[$_GET['id']-1]['Дата выписки']?>" class="form-item" autofocus required>
             </label><br>
             <label>Аллергия к препаратам
-                <input type="text" name="Аллергия к препаратам" value="<?=$post_null_get_article[$_GET['id']-1]['Аллергия к препаратам']?>" class="form-item" autofocus required>
+                <input type="text" name="Аллергия_к_препаратам" value="<?=$post_null_get_article[$_GET['id']-1]['Аллергия к препаратам']?>" class="form-item" autofocus >
             </label><br>
             <label>Назначенные препараты
-                <input type="text" name="Назначенные препараты" value="<?=$post_null_get_article[$_GET['id']-1]['Назначенные препараты']?>" class="form-item" autofocus required>
+                <input type="text" name="Назначенные_препараты" value="<?=$post_null_get_article[$_GET['id']-1]['Назначенные препараты']?>" class="form-item" autofocus required>
             </label><br>
             <input type="submit" value="Сохранить" class="btn">
         </form>
