@@ -124,33 +124,25 @@ return $articles; /* возвращаем результат в название
     }
 
     /* Обновляет содержимое уже существующей статьи */
-    function articles_edit($link, $id, $title, $date, $content){
+    function articles_edit($link){
 
-    $title = trim($title);
-    $content = trim($content);
-    $date = trim($date);
-    $id = (int)$id;
+        $fio = $_POST['fio'];
 
-    //Проверка
-    if ($title == '') /* Если пустой заголовок */
-    return false; /* не выполняем ничего */
+        for ($i=0; $i<=12; $i++) {
+            mysqli_query($link,"UPDATE FIO_pacienta SET fio_pacienta='$fio' WHERE id='$_GET[id]'");
+            mysqli_query($link,"UPDATE Strahovoi_polis SET Nomer_polisa='$_POST[strahovoi_polis]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE Pasport SET nomer_pasporta='$_POST[Паспорт]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE Palata SET nomer_palati='$_POST[Палата]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE Otdelenie SET nazvanie_otdelenia_specialnost='$_POST[Отделение]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE fio_vracha SET fio_vracha='$_POST[ФИО_Лечащего_врача]' WHERE id='$_GET[id]'");
+            mysqli_query($link,"UPDATE Diagnoz SET diagnoz='$_POST[Диагноз]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE Simptom SET simptom='$_POST[Симптом]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE data_postuplenia SET data_postuplenia='$_POST[Дата_поступления]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE data_vipiski SET data_vipiski='$_POST[Дата_выписки]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE allergia_k_preparatam SET alergia_k_preparatam='$_POST[Аллергия_к_препаратам]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE Naznachenie_preparati SET naznachenie_preparati='$_POST[Назначенные_препараты]' WHERE fio_pacienta='$fio'");
+        }
 
-    //Запрос
-    $sql = "UPDATE articles SET title='%s', content='%s', date='%s' WHERE id='%d'";
-    /* Обновить таблицу articles, в качестве параметров подставляем значения ниже, где ид - последний параметр  */
-
-    /* Берем нашу $sql и посставляем значения ниже  */
-    /* mysqli_real_escape_string (экранирует) подставляет обратный слэш (/)  перед теми символами которые могут
-    испортить sql запрос */
-    $query = sprintf($sql,  mysqli_real_escape_string($link, $title),
-    mysqli_real_escape_string($link, $content),
-    mysqli_real_escape_string($link, $date),
-    $id);
-
-    $result = mysqli_query($link, $query); /* выполнение запроса */
-
-    if (!$result) /* если небыло ничего */
-    die(mysqli_error($link)); /* приостановить работу, вывести ошибку */
 
     return mysqli_affected_rows($link); /* Если все гуд, возвращаем кол-во статей которое было успешно отредактировано */
     }

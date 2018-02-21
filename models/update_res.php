@@ -1,6 +1,7 @@
 <?php //include "menu.php"; ?>
 <?php include "../database.php"; ?>
 <?php include "../models/articles.php";
+//var_dump( "bgbgbgbgb =".$_POST['action']);
 $link = db_connect();
 
 //Направляем на основную таблицу
