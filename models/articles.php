@@ -96,31 +96,10 @@ return $articles; /* возвращаем результат в название
     }
 
     /* Создание новой статьи через админку */
-    function articles_new($link, $title, $date, $content){
-    echo "tut?";
-    //Пордготовка.
-    $title = trim($title);/* команда trim убирает слева и справа пробелы в тайтле и контенте, если они присуств. */
-    $content = trim($content);
+    function articles_new($link, $id, $fio){
 
-    //Проверка.
-    if ($title == '') return false; /* если тайтс пустой возвращаем фолс */
+        mysqli_query($link,"INSERT INTO `FIO_pacienta`(`id`, `fio_pacienta`) VALUES ('$id','$fio')");
 
-    //Запрос на добавление в базу столбцов
-    $t = "INSERT INTO articles (title, date, content) /*Вставить в таблицу articles  title, date и content */
-    VALUES ('%s', '%s', '%s')"; /* В точно таком же порядке передаем значения! %s - означает string(строковые) */
-
-    /* sprintf — Возвращает отформатированную строку */
-    $query = sprintf($t, mysqli_real_escape_string($link, $title), /* берет $t и вместо процента вставляет title */
-    mysqli_real_escape_string($link, $date), /* date */
-    mysqli_real_escape_string($link, $content)); /* и content */
-    /* mysqli_real_escape_string позволяет экранировать входящую строку, обезопасить себя от sql инъекции */
-
-    $result = mysqli_query($link, $query); /* Все что мы отобрали (САМ ЗАПРОС) записываем в переменную $result */
-
-    if (!$result) /* если ошибка */
-    die (mysqli_error($link)); /* прекратить выполнение скрипта и вывести сообщ об ошибке */
-
-    return true; /* если данные успешно добавились возвращаем true */
     }
 
     /* Обновляет содержимое уже существующей статьи */
@@ -147,9 +126,6 @@ return $articles; /* возвращаем результат в название
     return mysqli_affected_rows($link); /* Если все гуд, возвращаем кол-во статей которое было успешно отредактировано */
     }
 
-    function articles_edit2 ($link){
-
-    }
 
     /* Удаляет статью */
     function articles_delete($link, $id){

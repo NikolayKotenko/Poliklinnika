@@ -1,9 +1,9 @@
 <?php
-require_once ("database.php"); /* подключение к базе */
-require_once ("models/articles.php"); /* сама логика, выборка (MVC модель)*/
-//require_once ("admin-panel/index.php");
-$link = db_connect(); /* непонял зачем делать это еще раз */
-$ebal = articles_all($link);
+//require_once ("database.php"); /* подключение к базе */
+//require_once ("models/articles.php"); /* сама логика, выборка (MVC модель)*/
+////require_once ("admin-panel/index.php");
+//$link = db_connect(); /* непонял зачем делать это еще раз */
+////$ebal = articles_all($link);
 
 
 

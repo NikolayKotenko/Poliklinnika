@@ -13,7 +13,7 @@
     <div>
         <!-- Атрибут action - говорит о том что данные передавать скрипту -->
         <!-- Method - каким способом будут передаваться параметры.-->
-<!--            <form method="post" action="../admin-panel/index.php?action=add&id=--><?//=$_GET['id']-1?><!-- ">-->
+<!--            <form method="post" action="../admin-panel/index.php?action=add&id=--><?//=$_GET['id']?><!-- ">-->
         <form action="../admin-panel/index.php?action=<?=$_GET['action']?>&id=<?php echo $_GET['id'] ?>"  method="POST" >
 
                 <!-- Метод post посылает на сервер данные в запросе браузера, в отличие от get передает не отображая в url -->

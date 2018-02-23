@@ -18,7 +18,7 @@
 <!--        <pre>-->
 <!--        --><?php //print_r($articles_table)  ?>
 <!--        </pre>-->
-        <a href="../views/form_add_new_article_admin-panel.php">Добавить статью</a> <!-- Ссылка скрытого пула) в файле admin-panel
+        <a href="../views/form_add_new_article_admin-panel.php?action=add">Добавить статью</a> <!-- Ссылка скрытого пула) в файле admin-panel
         /index.php в обработке добавления статей - header("Location: index.php") - грубо говоря спец лейбл с параметром add -->
         <a href="../index.php">Главная страница со статьями</a>
         <table class="admin-table" border="1">
