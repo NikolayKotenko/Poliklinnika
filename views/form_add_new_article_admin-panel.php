@@ -1,3 +1,8 @@
+<?php
+require_once ("../database.php"); /* подключение к базе */
+require_once ("../models/articles.php"); /* сама логика, выборка (MVC модель)*/
+$link = db_connect(); /* непонял зачем делать это еще раз */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +16,43 @@
 <div class="container">
     <h1>Добавление статьи</h1>
     <div>
+        <?php
+        $query2 = "SELECT
+    FIO_pacienta.id,
+    FIO_pacienta.fio_pacienta AS 'ФИО Пациента',
+    Strahovoi_polis.Nomer_polisa AS 'Страховой полис',
+    Pasport.nomer_pasporta AS 'Паспорт',
+    Palata.nomer_palati AS 'Палата',
+    Otdelenie.nazvanie_otdelenia_specialnost AS 'Отделение',
+    Palata.fio_vracha AS 'ФИО Лечащего врача',
+    Diagnoz.diagnoz AS 'Диагноз',
+    Simptom.simptom AS 'Симптом',
+    Palata.data_postuplenia AS 'Дата поступления',
+    Palata.data_vipiski AS 'Дата выписки',
+    allergia_k_preparatam.alergia_k_preparatam AS 'Аллергия к препаратам',
+    Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты'
+    
+    FROM
+    FIO_pacienta
+    
+    LEFT JOIN Palata USING (fio_pacienta)
+    
+    JOIN Strahovoi_polis ON FIO_pacienta.fio_pacienta = Strahovoi_polis.fio_pacienta
+    JOIN Pasport ON FIO_pacienta.fio_pacienta = Pasport.fio_pacienta
+    JOIN Otdelenie ON FIO_pacienta.fio_pacienta = Otdelenie.fio_pacienta
+    JOIN Diagnoz ON FIO_pacienta.fio_pacienta = Diagnoz.fio_pacienta
+    JOIN Simptom ON FIO_pacienta.fio_pacienta = Simptom.fio_pacienta
+    JOIN allergia_k_preparatam ON FIO_pacienta.fio_pacienta = allergia_k_preparatam.fio_pacienta
+    JOIN Naznachenie_preparati ON FIO_pacienta.fio_pacienta = Naznachenie_preparati.fio_pacienta
+    ORDER BY `id` ASC";
+
+        $result2 = mysqli_query($link, $query2); /* Все что мы отобрали (САМ ЗАПРОС) записываем в переменную $result */
+
+        ?>
+        <pre>
+            <?php var_dump($result2);?>
+        </pre>
+
         <!-- Атрибут action - говорит о том что данные передавать скрипту -->
         <!-- Method - каким способом будут передаваться параметры.-->
 <!--            <form method="post" action="../admin-panel/index.php?action=add&id=--><?//=$_GET['id']?><!-- ">-->
@@ -26,30 +68,40 @@
             <pre>
             <?php
 
-//            require_once ("../database.php"); /* подключение к базе */
-//            require_once ("../models/articles.php"); /* сама логика, выборка (MVC модель)*/
-//            $link = db_connect(); /* непонял зачем делать это еще раз */
-//            var_dump($_GET['action']);
-//            var_dump(articles_all($link));?>
-<!--            </pre>-->
-<!--            --><?php
-//
-//
-//
+
+            var_dump($_GET['action']);
+            var_dump(articles_all($link));?>
+            </pre>
+            <?php
+            $post_null_get_article = articles_all($link);
+
+
 //            while ($row = mysqli_fetch_array($post_null_get_article)){
-//                echo "<option value=' ".[$row['id']-1]." '>".$row['name_category']."</option>";
+//                echo "<option value=' ".$row['id']." '>".$row['ФИО Пациента']."</option>";
 //            }
-//
-//            ?>
+
+            ?>
 
 
             </pre>
             <br><br>
 
                 <label> ФИО Пациента
-                <input type="text" name="fio_pacienta" value="<?=$post_null_get_article[$_GET['id']-1]['ФИО Пациента']?>" class="form-item" autofocus required>
-                <!-- required применяет стилевые правила к тегу <input>,  Он позволяет выделять поля
-                обязательные к заполнению перед отправкой формы. -->
+                    <select> <?php echo "<option value=' ".$a['id']." '>".$a['ФИО Пациента']."</option>";?>
+                    </select>
+                    <select name="book">
+                        <option value="0">Выберите книгу</option>
+                        <?
+                        while($row = mysqli_fetch_assoc($result2)){
+                            ?>
+                            <option value="<?=$row['id']?>"><?=$row['ФИО Пациента']?></option>
+                            <?
+                        }
+                        ?>
+                    </select>
+                    </select>
+                    <!-- required применяет стилевые правила к тегу <input>,  Он позволяет выделять поля
+                    обязательные к заполнению перед отправкой формы. -->
                 <!-- Атрибут autofocus устанавливает, что кнопка получает фокус после загрузки страницы. -->
             </label><br>
             <label>Страховой полис
