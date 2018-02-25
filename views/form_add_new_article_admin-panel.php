@@ -39,7 +39,7 @@
             <br><br>
 
                 <label> ФИО Пациента
-                <input type="text" name="fio" value="<?=$post_null_get_article[$_GET['id']-1]['ФИО Пациента']?>" class="form-item" autofocus required>
+                <input type="text" name="fio_pacienta" value="<?=$post_null_get_article[$_GET['id']-1]['ФИО Пациента']?>" class="form-item" autofocus required>
                 <!-- required применяет стилевые правила к тегу <input>,  Он позволяет выделять поля
                 обязательные к заполнению перед отправкой формы. -->
                 <!-- Атрибут autofocus устанавливает, что кнопка получает фокус после загрузки страницы. -->
