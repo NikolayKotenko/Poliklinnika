@@ -23,27 +23,25 @@
                 т.е считываем значение action из url если он = edit - отправ будет по адресу action=edit. add по аналогии -->
                 <!-- $_GET['id'] - считывает id c url -->
 
-            <pre>
             <?php
-
+//
 //            require_once ("../database.php"); /* подключение к базе */
 //            require_once ("../models/articles.php"); /* сама логика, выборка (MVC модель)*/
 //            $link = db_connect(); /* непонял зачем делать это еще раз */
 //            var_dump($_GET['action']);
 //            var_dump(articles_all($link));?>
 <!--            </pre>-->
-<!--            --><?php
-//
-//
-//
+            <?php
+
+
+
 //            while ($row = mysqli_fetch_array($post_null_get_article)){
 //                echo "<option value=' ".[$row['id']-1]." '>".$row['name_category']."</option>";
 //            }
-//
-//            ?>
+
+            ?>
 
 
-            </pre>
             <br><br>
 
                 <label> ФИО Пациента

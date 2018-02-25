@@ -12,7 +12,7 @@
 
     // Добавление статьи
     if ($action == "add"){
-
+//        $post_null_get_article2 = articles_all($link);
 //        var_dump([$_POST['fio']]);
 //        var_dump([$_POST['strahovoi_polis']]);
 //        exit();
@@ -46,7 +46,8 @@
 
             header("Location: ../admin-panel/index.php");
         }
-//        include("../views/table_articles_admin-panel.php"); /* подгружаем шаблон в котором будет добавлять новую статью */
+        include("../views/form_add_new_article_admin-panel.php"); /* подгружаем шаблон в котором будет добавлять новую статью */
+
     }
     // Редактирование статьи
     else if ($action == "edit") { /* если входящий параметр action == edit */
@@ -67,7 +68,7 @@
 
 
         /* получаем статью из базы */
-        include("../views/form_add_new_article_admin-panel.php"); /* подключаем сформированную админ панель */
+        include("../views/form_edit_article_admin-panel.php"); /* подключаем сформированную админ панель */
 //        include("../test.php"); /* подключаем сформированную админ панель */
 
     }
