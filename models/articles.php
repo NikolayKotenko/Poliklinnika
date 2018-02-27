@@ -121,7 +121,7 @@ return $articles; /* возвращаем результат в название
     /* Обновляет содержимое уже существующей статьи */
     function articles_edit($link){
 
-        $fio = $_POST['fio'];
+        $fio = $_POST['fio_pacienta'];
 
         for ($i=0; $i<=12; $i++) {
             mysqli_query($link,"UPDATE FIO_pacienta SET fio_pacienta='$fio' WHERE id='$_GET[id]'");
