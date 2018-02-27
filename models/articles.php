@@ -99,20 +99,20 @@ return $articles; /* возвращаем результат в название
     function articles_new($link, $fio_pacienta, $strahovoi_polis, $pasport, $palata, $otdelenie,
                           $fio_vracha, $diagnoz, $simptom, $data_postuplenia, $data_vipiski, $allergia_k_preparatam, $naznachenie_preparati){
         for ($i=0; $i<=12; $i++) {
-            mysqli_query($link, "INSERT INTO `FIO_pacienta`(`id`, `fio_pacienta`) VALUES (NULL,'$fio_pacienta')");
-            mysqli_query($link, "INSERT INTO `Strahovoi_polis`(`id`, `Nomer_polisa`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$strahovoi_polis', '$fio_pacienta')");
-            mysqli_query($link, "INSERT INTO `Pasport`(`id`, `nomer_pasporta`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$pasport', '$fio_pacienta')");
-            mysqli_query($link, "INSERT INTO `Palata`(`id`, `nomer_palati`, `fio_pacienta`, `fio_vracha`, `data_postuplenia`, `data_vipiski`)
+            mysqli_query($link, "INSERT IGNORE INTO `FIO_pacienta`(`id`, `fio_pacienta`) VALUES (NULL,'$fio_pacienta')");
+            mysqli_query($link, "INSERT IGNORE INTO `Strahovoi_polis`(`id`, `Nomer_polisa`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$strahovoi_polis', '$fio_pacienta')");
+            mysqli_query($link, "INSERT IGNORE INTO `Pasport`(`id`, `nomer_pasporta`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$pasport', '$fio_pacienta')");
+            mysqli_query($link, "INSERT IGNORE INTO `Palata`(`id`, `nomer_palati`, `fio_pacienta`, `fio_vracha`, `data_postuplenia`, `data_vipiski`)
                                         VALUES (LAST_INSERT_ID(),'$palata', '$fio_pacienta', '$fio_vracha', '$data_postuplenia', '$data_vipiski')");
-            mysqli_query($link, "INSERT INTO `Otdelenie`(`id`, `nazvanie_otdelenia_specialnost`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$otdelenie', '$fio_pacienta')");
-            mysqli_query($link, "INSERT INTO `fio_vracha`(`id`, `fio_vracha`, `nazvanie_otdelenia_specialnost`) VALUES (LAST_INSERT_ID(),'$fio_vracha','$otdelenie')");
-            mysqli_query($link, "INSERT INTO `Diagnoz`(`id`, `diagnoz`, `fio_pacienta`, `fio_vracha_postavivshego_diagnoz`) 
+            mysqli_query($link, "INSERT IGNORE INTO `Otdelenie`(`id`, `nazvanie_otdelenia_specialnost`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$otdelenie', '$fio_pacienta')");
+            mysqli_query($link, "INSERT IGNORE INTO `fio_vracha`(`id`, `fio_vracha`, `nazvanie_otdelenia_specialnost`) VALUES (LAST_INSERT_ID(),'$fio_vracha','$otdelenie')");
+            mysqli_query($link, "INSERT IGNORE INTO `Diagnoz`(`id`, `diagnoz`, `fio_pacienta`, `fio_vracha_postavivshego_diagnoz`) 
                                         VALUES (LAST_INSERT_ID(),'$diagnoz','$fio_pacienta','$fio_vracha')");
-            mysqli_query($link, "INSERT INTO `Simptom`(`id`, `simptom`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$simptom','$fio_pacienta')");
-            mysqli_query($link, "INSERT INTO `data_postuplenia`(`id`, `data_postuplenia`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$data_postuplenia','$fio_pacienta')");
-            mysqli_query($link, "INSERT INTO `data_vipiski`(`id`, `data_vipiski`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$data_vipiski','$fio_pacienta')");
-            mysqli_query($link, "INSERT INTO `allergia_k_preparatam`(`id`, `alergia_k_preparatam`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$allergia_k_preparatam','$fio_pacienta')");
-            mysqli_query($link, "INSERT INTO `Naznachenie_preparati`(`id`, `naznachenie_preparati`, `fio_pacienta`, `fio_vracha_naznachivzhego_preparati`) 
+            mysqli_query($link, "INSERT IGNORE INTO `Simptom`(`id`, `simptom`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$simptom','$fio_pacienta')");
+            mysqli_query($link, "INSERT IGNORE INTO `data_postuplenia`(`id`, `data_postuplenia`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$data_postuplenia','$fio_pacienta')");
+            mysqli_query($link, "INSERT IGNORE INTO `data_vipiski`(`id`, `data_vipiski`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$data_vipiski','$fio_pacienta')");
+            mysqli_query($link, "INSERT IGNORE INTO `allergia_k_preparatam`(`id`, `alergia_k_preparatam`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$allergia_k_preparatam','$fio_pacienta')");
+            mysqli_query($link, "INSERT IGNORE INTO `Naznachenie_preparati`(`id`, `naznachenie_preparati`, `fio_pacienta`, `fio_vracha_naznachivzhego_preparati`) 
                                                   VALUES (LAST_INSERT_ID(),'$naznachenie_preparati','$fio_pacienta','$fio_vracha')");
         }
         return mysqli_affected_rows($link); /* Если все гуд, возвращаем кол-во статей которое было успешно отредактировано */
@@ -151,7 +151,7 @@ return $articles; /* возвращаем результат в название
     if ($id == 0) return false;
 
     //Запрос
-    $query = sprintf("DELETE FROM articles WHERE id='%d'", $id);
+    $query = sprintf("DELETE FROM FIO_pacienta WHERE id='%d'", $id);
     /* удалить из табл articles строку в которой ид = $id  */
     $result = mysqli_query($link, $query);
 

@@ -22,24 +22,38 @@
                 <!-- $_GET['action'] - позвояет в зависимости от того редактируем мы или создаем статью изменять параметр action
                 т.е считываем значение action из url если он = edit - отправ будет по адресу action=edit. add по аналогии -->
                 <!-- $_GET['id'] - считывает id c url -->
-
+<pre>
+<!--    --><?php //var_dump(articles_all($link));?>
+</pre>
             <?php
 //
 //            require_once ("../database.php"); /* подключение к базе */
 //            require_once ("../models/articles.php"); /* сама логика, выборка (MVC модель)*/
 //            $link = db_connect(); /* непонял зачем делать это еще раз */
 //            var_dump($_GET['action']);
-//            var_dump(articles_all($link));?>
-<!--            </pre>-->
-            <?php
+//            var_dump(articles_all($link));
 
-
-
-//            while ($row = mysqli_fetch_array($post_null_get_article)){
-//                echo "<option value=' ".[$row['id']-1]." '>".$row['name_category']."</option>";
-//            }
-
+            var_dump($_GET['id']);
+            var_dump ($post_null_get_article['all']['id']);
+            echo "= tut";
             ?>
+            <?php
+                foreach ( $post_null_get_article as $array_name => $array_value ) {
+                    print_r($array_value); // отладка
+                    print("<b>".$array_name."</b><br>");
+
+                    foreach ( $array_value as $index => $value )
+                    {
+                        print("".$array_name." => ".$index." => ".$value."<br>");
+                        if ($value == $_GET['id'])
+                        echo $fuck = $array_value;
+                    }
+                }
+                var_dump($fuck);
+                echo $fuck['id'];
+                echo $fuck['ФИО Пациента'];
+            ?>
+
 
 
             <br><br>

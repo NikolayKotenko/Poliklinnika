@@ -51,8 +51,8 @@
                 <td><?=$a['ФИО Лечащего врача']?></td>
                 <td><?=$a['Диагноз']?></td>
                 <td><?=$a['Симптом']?></td>
-                <td><?php echo DateTime::createFromFormat('Y-m-d',$a['Дата поступления'])->format('d/m/Y');?></td>
-                <td><?php echo DateTime::createFromFormat('Y-m-d',$a['Дата выписки'])->format('d/m/Y');?></td>
+<!--                <td>--><?php //echo DateTime::createFromFormat('Y-m-d',$a['Дата поступления'])->format('d/m/Y');?><!--</td>-->
+<!--                <td>--><?php //echo DateTime::createFromFormat('Y-m-d',$a['Дата выписки'])->format('d/m/Y');?><!--</td>-->
                 <td><?=$a['Аллергия к препаратам']?></td>
                 <td><?=$a['Назначенные препараты']?></td>
 

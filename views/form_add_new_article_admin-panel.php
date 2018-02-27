@@ -75,11 +75,6 @@ $link = db_connect(); /* непонял зачем делать это еще р
             <?php
             $post_null_get_article = articles_all($link);
 
-
-//            while ($row = mysqli_fetch_array($post_null_get_article)){
-//                echo "<option value=' ".$row['id']." '>".$row['ФИО Пациента']."</option>";
-//            }
-
             ?>
 
 
