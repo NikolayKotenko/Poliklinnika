@@ -59,7 +59,7 @@
             <br><br>
 
                 <label> ФИО Пациента
-                <input type="text" name="fio_pacienta" value="<?=$array_id['ФИО Пациента']?>" class="form-item" autofocus required>
+                <input type="text" name="fio_pacienta" value="<?=$array_id['ФИО Пациента']?>" class="form-item" placeholder="Введите ФИО Пациента"  autofocus required>
                 <!-- required применяет стилевые правила к тегу <input>,  Он позволяет выделять поля
                 обязательные к заполнению перед отправкой формы. -->
                 <!-- Атрибут autofocus устанавливает, что кнопка получает фокус после загрузки страницы. -->
@@ -79,6 +79,9 @@
             </label><br>
             <label>ФИО Лечащего врача
                 <input type="text" name="ФИО_Лечащего_врача" value="<?=$array_id['ФИО Лечащего врача']?>" class="form-item" placeholder="Введите ФИО Лечащего врача" autofocus required>
+            </label><br>
+            <label>Должность
+                <input type="text" name="Должность" value="<?=$array_id['Должность']?>" class="form-item" placeholder="Введите должность врача" autofocus required>
             </label><br>
             <label>Диагноз
                 <input type="text" name="Диагноз" value="<?=$array_id['Диагноз']?>" class="form-item" placeholder="Введите Диагноз" autofocus required>

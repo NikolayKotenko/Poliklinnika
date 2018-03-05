@@ -32,3 +32,29 @@
 <!---->
 <!---->
 <!---->
+
+
+INSERT IGNORE INTO `FIO_pacienta`(`id`, `fio_pacienta`)
+VALUES (NULL,'Самойлова');
+INSERT IGNORE INTO `Strahovoi_polis`(`id`, `Nomer_polisa`, `fio_pacienta`) VALUES
+(LAST_INSERT_ID(),'44444444444', 'Самойлова');
+INSERT IGNORE INTO `Pasport`(`id`, `nomer_pasporta`, `fio_pacienta`)
+VALUES (LAST_INSERT_ID(),'4444444444', 'Самойлова');
+INSERT IGNORE INTO `Palata`(`id`, `nomer_palati`, `fio_pacienta`, `fio_vracha`, `doljnost`, `data_postuplenia`, `data_vipiski`)
+VALUES (LAST_INSERT_ID(),'4', 'Самойлова', 'Панкина', 'Отолларинголог', '2018-02-04', '2018-02-25');
+INSERT IGNORE INTO `Otdelenie`(`id`, `nazvanie_otdelenia_specialnost`, `fio_pacienta`)
+VALUES (LAST_INSERT_ID(),'Терапевтическое', 'Самойлова');
+INSERT IGNORE INTO `fio_vracha`(`id`, `fio_vracha`, `nazvanie_otdelenia_specialnost`)
+VALUES (LAST_INSERT_ID(),'Панкина','Терапевтическое');
+INSERT IGNORE INTO `Diagnoz`(`id`, `diagnoz`, `fio_pacienta`, `fio_vracha_postavivshego_diagnoz`)
+VALUES (LAST_INSERT_ID(),'Вазомоторный ринит','Самойлова','Панкина');
+INSERT IGNORE INTO `Simptom`(`id`, `simptom`, `fio_pacienta`)
+VALUES (LAST_INSERT_ID(),'Заложенность носа','Самойлова');
+INSERT IGNORE INTO `data_postuplenia`(`id`, `data_postuplenia`, `fio_pacienta`)
+VALUES (LAST_INSERT_ID(),'2018-02-04','Самойлова');
+INSERT IGNORE INTO `data_vipiski`(`id`, `data_vipiski`, `fio_pacienta`)
+VALUES (LAST_INSERT_ID(),'2018-02-25','Самойлова');
+INSERT IGNORE INTO `allergia_k_preparatam`(`id`, `alergia_k_preparatam`, `fio_pacienta`)
+VALUES (LAST_INSERT_ID(),'нет','Самойлова');
+INSERT IGNORE INTO `Naznachenie_preparati`(`id`, `naznachenie_preparati`, `fio_pacienta`, `fio_vracha_naznachivzhego_preparati`)
+VALUES (LAST_INSERT_ID(),'Ринорин','Самойлова','Панкина');

@@ -17,7 +17,7 @@
 //        var_dump([$_POST['strahovoi_polis']]);
 //        exit();
 //
-        header("Location: ../admin-panel/index.php");
+//        header("Location: ../admin-panel/index.php");
 
         /* Направляет нас после добавления новой статьи в админку
             index.php для проверки нет ли чего нового в get и post и если нет выводятся тупо все статьи которые есть */
@@ -34,6 +34,7 @@
                 $_POST['Палата'],
                 $_POST['Отделение'],
                 $_POST['ФИО_Лечащего_врача'],
+                $_POST['Должность'],
                 $_POST['Диагноз'],
                 $_POST['Симптом'],
                 $_POST['Дата_поступления'],
@@ -44,7 +45,7 @@
             articles_new (файл с логикой) где параметрами являются введеные в инпут данные в файле
             views/form_add_new_article_admin-panel.php которые передали методом POST в этот файл  */
 
-            header("Location: ../admin-panel/index.php");
+//            header("Location: ../admin-panel/index.php");
         }
         include("../views/form_add_new_article_admin-panel.php"); /* подгружаем шаблон в котором будет добавлять новую статью */
 

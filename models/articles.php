@@ -11,6 +11,7 @@ Pasport.nomer_pasporta AS 'Паспорт',
 Palata.nomer_palati AS 'Палата',
 Otdelenie.nazvanie_otdelenia_specialnost AS 'Отделение',
 Palata.fio_vracha AS 'ФИО Лечащего врача',
+Palata.doljnost AS 'Должность',
 Diagnoz.diagnoz AS 'Диагноз',
 Simptom.simptom AS 'Симптом',
 Palata.data_postuplenia AS 'Дата поступления',
@@ -62,6 +63,7 @@ return $articles; /* возвращаем результат в название
     Palata.nomer_palati AS 'Палата',
     Otdelenie.nazvanie_otdelenia_specialnost AS 'Отделение',
     Palata.fio_vracha AS 'ФИО Лечащего врача',
+    Palata.doljnost AS 'Должность',
     Diagnoz.diagnoz AS 'Диагноз',
     Simptom.simptom AS 'Симптом',
     Palata.data_postuplenia AS 'Дата поступления',
@@ -97,13 +99,13 @@ return $articles; /* возвращаем результат в название
 
     /* Создание новой статьи через админку */
     function articles_new($link, $fio_pacienta, $strahovoi_polis, $pasport, $palata, $otdelenie,
-                          $fio_vracha, $diagnoz, $simptom, $data_postuplenia, $data_vipiski, $allergia_k_preparatam, $naznachenie_preparati){
+                          $fio_vracha, $doljnost, $diagnoz, $simptom, $data_postuplenia, $data_vipiski, $allergia_k_preparatam, $naznachenie_preparati){
         for ($i=0; $i<=12; $i++) {
             mysqli_query($link, "INSERT IGNORE INTO `FIO_pacienta`(`id`, `fio_pacienta`) VALUES (NULL,'$fio_pacienta')");
             mysqli_query($link, "INSERT IGNORE INTO `Strahovoi_polis`(`id`, `Nomer_polisa`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$strahovoi_polis', '$fio_pacienta')");
             mysqli_query($link, "INSERT IGNORE INTO `Pasport`(`id`, `nomer_pasporta`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$pasport', '$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `Palata`(`id`, `nomer_palati`, `fio_pacienta`, `fio_vracha`, `data_postuplenia`, `data_vipiski`)
-                                        VALUES (LAST_INSERT_ID(),'$palata', '$fio_pacienta', '$fio_vracha', '$data_postuplenia', '$data_vipiski')");
+            mysqli_query($link, "INSERT IGNORE INTO `Palata`(`id`, `nomer_palati`, `fio_pacienta`, `fio_vracha`, `doljnost`, `data_postuplenia`, `data_vipiski`)
+                                                    VALUES (LAST_INSERT_ID(),'$palata', '$fio_pacienta', '$fio_vracha', '$doljnost', '$data_postuplenia', '$data_vipiski')");
             mysqli_query($link, "INSERT IGNORE INTO `Otdelenie`(`id`, `nazvanie_otdelenia_specialnost`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$otdelenie', '$fio_pacienta')");
             mysqli_query($link, "INSERT IGNORE INTO `fio_vracha`(`id`, `fio_vracha`, `nazvanie_otdelenia_specialnost`) VALUES (LAST_INSERT_ID(),'$fio_vracha','$otdelenie')");
             mysqli_query($link, "INSERT IGNORE INTO `Diagnoz`(`id`, `diagnoz`, `fio_pacienta`, `fio_vracha_postavivshego_diagnoz`) 
@@ -123,11 +125,12 @@ return $articles; /* возвращаем результат в название
 
         $fio = $_POST['fio_pacienta'];
 
-        for ($i=0; $i<=12; $i++) {
+        for ($i=0; $i<=13; $i++) {
             mysqli_query($link,"UPDATE FIO_pacienta SET fio_pacienta='$fio' WHERE id='$_GET[id]'");
             mysqli_query($link,"UPDATE Strahovoi_polis SET Nomer_polisa='$_POST[strahovoi_polis]' WHERE fio_pacienta='$fio'");
             mysqli_query($link,"UPDATE Pasport SET nomer_pasporta='$_POST[Паспорт]' WHERE fio_pacienta='$fio'");
             mysqli_query($link,"UPDATE Palata SET nomer_palati='$_POST[Палата]' WHERE fio_pacienta='$fio'");
+            mysqli_query($link,"UPDATE Palata SET doljnost='$_POST[Должность]' WHERE fio_pacienta='$fio'");
             mysqli_query($link,"UPDATE Otdelenie SET nazvanie_otdelenia_specialnost='$_POST[Отделение]' WHERE fio_pacienta='$fio'");
             mysqli_query($link,"UPDATE fio_vracha SET fio_vracha='$_POST[ФИО_Лечащего_врача]' WHERE id='$_GET[id]'");
             mysqli_query($link,"UPDATE Diagnoz SET diagnoz='$_POST[Диагноз]' WHERE fio_pacienta='$fio'");

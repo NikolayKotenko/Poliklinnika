@@ -83,7 +83,7 @@ $link = db_connect(); /* непонял зачем делать это еще р
             <a href="../admin-panel/index.php">Сводная таблица</a> <br><br>
 
             <label> ФИО Пациента
-                    <input type="text" name="fio_pacienta" value="" class="form-item" autofocus required>
+                    <input type="text" name="fio_pacienta" value="" class="form-item" placeholder="Введите ФИО Пациента" autofocus required>
 <!--                    <select name="book">-->
 <!--                        <option value="0">Выберите книгу</option>-->
 <!--                        --><?//
@@ -113,6 +113,9 @@ $link = db_connect(); /* непонял зачем делать это еще р
             <label>ФИО Лечащего врача
                 <input type="text" name="ФИО_Лечащего_врача" value="" class="form-item" placeholder="Введите ФИО Лечащего врача" autofocus required>
             </label><br>
+            <label>Должность
+                <input type="text" name="Должность" value="" class="form-item" placeholder="Введите должность врача" autofocus required>
+            </label><br>
             <label>Диагноз
                 <input type="text" name="Диагноз" value="" class="form-item" placeholder="Введите Диагноз" autofocus required>
             </label><br>
@@ -135,5 +138,6 @@ $link = db_connect(); /* непонял зачем делать это еще р
         </form>
     </div>
 </div>
+
 </body>
 </html>
