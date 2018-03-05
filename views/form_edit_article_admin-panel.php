@@ -33,29 +33,29 @@
 //            var_dump($_GET['action']);
 //            var_dump(articles_all($link));
 
-            var_dump($_GET['id']);
-            var_dump ($post_null_get_article['all']['id']);
-            echo "= tut";
+//            var_dump($_GET['id']);
+//            var_dump ($post_null_get_article['all']['id']);
+//            echo "= tut";
             ?>
             <?php
                 foreach ( $post_null_get_article as $array_name => $array_value ) {
-                    print_r($array_value); // отладка
-                    print("<b>".$array_name."</b><br>");
+//                    print_r($array_value); // отладка
+//                    print("<b>".$array_name."</b><br>");
 
                     foreach ( $array_value as $index => $value )
                     {
-                        print("".$array_name." => ".$index." => ".$value."<br>");
+                        ("".$array_name." => ".$index." => ".$value."<br>");
                         if ($value == $_GET['id'])
-                        echo $array_id = $array_value;
+                         $array_id = $array_value;
                     }
                 }
-                var_dump($array_id);
-                echo $array_id['id'];
-                echo $array_id['ФИО Пациента'];
+//                var_dump($array_id);
+//                echo $array_id['id'];
+//                echo $array_id['ФИО Пациента'];
             ?>
 
 
-
+            <a href="../admin-panel/index.php">Сводная таблица</a>
             <br><br>
 
                 <label> ФИО Пациента
@@ -64,40 +64,43 @@
                 обязательные к заполнению перед отправкой формы. -->
                 <!-- Атрибут autofocus устанавливает, что кнопка получает фокус после загрузки страницы. -->
             </label><br>
+
             <label>Страховой полис
-                <input type="text" name="strahovoi_polis" value="<?=$array_id['Страховой полис']?>" class="form-item" autofocus required>
+                <input type="text" minlength="11" maxlength="11" name="strahovoi_polis" value="<?=$array_id['Страховой полис']?>" class="form-item" placeholder="Введите 11 цифр" autofocus required>
             </label> <br>
             <label>Паспорт
-                <input type="text" name="Паспорт" value="<?=$array_id['Паспорт']?>" class="form-item" autofocus required>
+                <input type="text" minlength="10" maxlength="10" name="Паспорт" value="<?=$array_id['Паспорт']?>" class="form-item" placeholder="Введите 10 цифр" autofocus required>
             </label><br>
             <label>Палата
-                <input type="text" name="Палата" value="<?=$array_id['Палата']?>" class="form-item" autofocus required>
+                <input type="text" pattern="\d{1}" name="Палата" value="<?=$array_id['Палата']?>" class="form-item" placeholder="Введите одно число" autofocus required>
             </label><br>
             <label>Отделение
-                <input type="text" name="Отделение" value="<?=$array_id['Отделение']?>" class="form-item" autofocus required>
+                <input type="text" name="Отделение" value="<?=$array_id['Отделение']?>" class="form-item" placeholder="Введите название отделения" autofocus required>
             </label><br>
             <label>ФИО Лечащего врача
-                <input type="text" name="ФИО_Лечащего_врача" value="<?=$array_id['ФИО Лечащего врача']?>" class="form-item" autofocus required>
+                <input type="text" name="ФИО_Лечащего_врача" value="<?=$array_id['ФИО Лечащего врача']?>" class="form-item" placeholder="Введите ФИО Лечащего врача" autofocus required>
             </label><br>
             <label>Диагноз
-                <input type="text" name="Диагноз" value="<?=$array_id['Диагноз']?>" class="form-item" autofocus required>
+                <input type="text" name="Диагноз" value="<?=$array_id['Диагноз']?>" class="form-item" placeholder="Введите Диагноз" autofocus required>
             </label><br>
             <label>Симптом
-                <input type="text" name="Симптом" value="<?=$array_id['Симптом']?>" class="form-item" autofocus required>
+                <input type="text" name="Симптом" value="<?=$array_id['Симптом']?>" class="form-item" placeholder="Введите Симптом" autofocus required>
             </label><br>
             <label>Дата поступления
-                <input type="date" name="Дата_поступления" value="<?=$array_id['Дата поступления']?>" class="form-item" autofocus required>
+                <input type="date" name="Дата_поступления" value="<?=$array_id['Дата поступления']?>" class="form-item" placeholder="Введите Дату поступления пациента" autofocus required>
             </label><br>
             <label>Дата выписки
-                <input type="date" name="Дата_выписки" value="<?=$array_id['Дата выписки']?>" class="form-item" autofocus required>
+                <input type="date" name="Дата_выписки" value="<?=$array_id['Дата выписки']?>" class="form-item" placeholder="Введите Дату выписки" autofocus required>
             </label><br>
             <label>Аллергия к препаратам
-                <input type="text" name="Аллергия_к_препаратам" value="<?=$array_id['Аллергия к препаратам']?>" class="form-item" autofocus >
+                <input type="text" name="Аллергия_к_препаратам" value="<?=$array_id['Аллергия к препаратам']?>" class="form-item" placeholder="Введите на какие препараты может быть аллергия" autofocus >
             </label><br>
             <label>Назначенные препараты
-                <input type="text" name="Назначенные_препараты" value="<?=$array_id['Назначенные препараты']?>" class="form-item" autofocus required>
+                <input type="text" name="Назначенные_препараты" value="<?=$array_id['Назначенные препараты']?>" class="form-item" placeholder="Введите препараты назначенные врачом" autofocus required>
             </label><br>
             <input type="submit" value="Сохранить" class="btn">
+
+
         </form>
     </div>
 </div>
