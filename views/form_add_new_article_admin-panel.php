@@ -17,38 +17,38 @@ $link = db_connect(); /* непонял зачем делать это еще р
     <h1>Добавление статьи</h1>
     <div>
         <?php
-//        $query2 = "SELECT
-//    FIO_pacienta.id,
-//    FIO_pacienta.fio_pacienta AS 'ФИО Пациента',
-//    Strahovoi_polis.Nomer_polisa AS 'Страховой полис',
-//    Pasport.nomer_pasporta AS 'Паспорт',
-//    Palata.nomer_palati AS 'Палата',
-//    Otdelenie.nazvanie_otdelenia_specialnost AS 'Отделение',
-//    Palata.fio_vracha AS 'ФИО Лечащего врача',
-//    Diagnoz.diagnoz AS 'Диагноз',
-//    Simptom.simptom AS 'Симптом',
-//    Palata.data_postuplenia AS 'Дата поступления',
-//    Palata.data_vipiski AS 'Дата выписки',
-//    allergia_k_preparatam.alergia_k_preparatam AS 'Аллергия к препаратам',
-//    Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты'
+        $query2 = "SELECT
+    FIO_pacienta.id,
+    FIO_pacienta.fio_pacienta AS 'ФИО Пациента',
+    Strahovoi_polis.Nomer_polisa AS 'Страховой полис',
+    Pasport.nomer_pasporta AS 'Паспорт',
+    Palata.nomer_palati AS 'Палата',
+    Otdelenie.nazvanie_otdelenia_specialnost AS 'Отделение',
+    Palata.fio_vracha AS 'ФИО Лечащего врача',
+    Diagnoz.diagnoz AS 'Диагноз',
+    Simptom.simptom AS 'Симптом',
+    Palata.data_postuplenia AS 'Дата поступления',
+    Palata.data_vipiski AS 'Дата выписки',
+    allergia_k_preparatam.alergia_k_preparatam AS 'Аллергия к препаратам',
+    Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты'
+
+    FROM
+    FIO_pacienta
+
+    LEFT JOIN Palata USING (fio_pacienta)
+
+    JOIN Strahovoi_polis ON FIO_pacienta.fio_pacienta = Strahovoi_polis.fio_pacienta
+    JOIN Pasport ON FIO_pacienta.fio_pacienta = Pasport.fio_pacienta
+    JOIN Otdelenie ON FIO_pacienta.fio_pacienta = Otdelenie.fio_pacienta
+    JOIN Diagnoz ON FIO_pacienta.fio_pacienta = Diagnoz.fio_pacienta
+    JOIN Simptom ON FIO_pacienta.fio_pacienta = Simptom.fio_pacienta
+    JOIN allergia_k_preparatam ON FIO_pacienta.fio_pacienta = allergia_k_preparatam.fio_pacienta
+    JOIN Naznachenie_preparati ON FIO_pacienta.fio_pacienta = Naznachenie_preparati.fio_pacienta
+    ORDER BY `id` ASC";
+
+        $result2 = mysqli_query($link, $query2); /* Все что мы отобрали (САМ ЗАПРОС) записываем в переменную $result */
 //
-//    FROM
-//    FIO_pacienta
-//
-//    LEFT JOIN Palata USING (fio_pacienta)
-//
-//    JOIN Strahovoi_polis ON FIO_pacienta.fio_pacienta = Strahovoi_polis.fio_pacienta
-//    JOIN Pasport ON FIO_pacienta.fio_pacienta = Pasport.fio_pacienta
-//    JOIN Otdelenie ON FIO_pacienta.fio_pacienta = Otdelenie.fio_pacienta
-//    JOIN Diagnoz ON FIO_pacienta.fio_pacienta = Diagnoz.fio_pacienta
-//    JOIN Simptom ON FIO_pacienta.fio_pacienta = Simptom.fio_pacienta
-//    JOIN allergia_k_preparatam ON FIO_pacienta.fio_pacienta = allergia_k_preparatam.fio_pacienta
-//    JOIN Naznachenie_preparati ON FIO_pacienta.fio_pacienta = Naznachenie_preparati.fio_pacienta
-//    ORDER BY `id` ASC";
-//
-//        $result2 = mysqli_query($link, $query2); /* Все что мы отобрали (САМ ЗАПРОС) записываем в переменную $result */
-//
-//        ?>
+        ?>
 <!--        <pre>-->
 <!--            --><?php //var_dump($result2);?>
 <!--        </pre>-->
@@ -84,14 +84,14 @@ $link = db_connect(); /* непонял зачем делать это еще р
 
             <label> ФИО Пациента
                     <input type="text" name="fio_pacienta" value="" class="form-item" placeholder="Введите ФИО Пациента" autofocus required>
-<!--                    <select name="book">-->
-<!--                        <option value="0">Выберите книгу</option>-->
-<!--                        --><?//
-//                        while($row = mysqli_fetch_assoc($result2)){
-//                            ?>
-<!--                            <option value="--><?//=$row['id']?><!--">--><?//=$row['ФИО Пациента']?><!--</option>-->
-<!--                            --><?//
-//                        }
+                    <select name="book">
+                        <option value="0">Выберите книгу</option>
+                        <?
+                        while($row = mysqli_fetch_assoc($result2)){
+                            ?>
+                            <option value="<?=$row['id']?>"><?=$row['ФИО Пациента']?></option>
+                            <?
+                        }
 //                        ?>
 <!--                    </select>-->
                     <!-- required применяет стилевые правила к тегу <input>,  Он позволяет выделять поля
