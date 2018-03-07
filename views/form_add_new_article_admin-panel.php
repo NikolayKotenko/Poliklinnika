@@ -84,15 +84,15 @@ $link = db_connect(); /* непонял зачем делать это еще р
 
             <label> ФИО Пациента
                     <input type="text" name="fio_pacienta" value="" class="form-item" placeholder="Введите ФИО Пациента" autofocus required>
-                    <select name="book">
-                        <option value="0">Выберите книгу</option>
-                        <?
-                        while($row = mysqli_fetch_assoc($result2)){
-                            ?>
-                            <option value="<?=$row['id']?>"><?=$row['ФИО Пациента']?></option>
-                            <?
-                        }
-//                        ?>
+<!--                    <select name="book">-->
+<!--                        <option value="0">Выберите книгу</option>-->
+<!--                        --><?//
+//                        while($row = mysqli_fetch_assoc($result2)){
+//                            ?>
+<!--                            <option value="--><?//=$row['id']?><!--">--><?//=$row['ФИО Пациента']?><!--</option>-->
+<!--                            --><?//
+//                        }
+////                        ?>
 <!--                    </select>-->
                     <!-- required применяет стилевые правила к тегу <input>,  Он позволяет выделять поля
                     обязательные к заполнению перед отправкой формы. -->
