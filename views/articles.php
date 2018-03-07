@@ -23,25 +23,56 @@ $array_not_fetch_assoc = articles_all_not_fetch($link);
         <br><br><br><br>
         <label>10 пациентов которые чаще всего обращаются к врачам</label>
         <br>
-
-        <select name="book">
+        <form action="" method="post">
+        <select name="doljnost" id="doljnost" onchange="document.getElementById('spisok_10_pacietnov').value=value">
             <option value="0">Выберите книгу</option>
         <?php
             while($row = mysqli_fetch_assoc($array_not_fetch_assoc)){
                 ?>
-                <option value=""><?=$row['Должность']?></option>
+                <option value="<?=$row['Должность']?>"><?=$row['Должность']?></option>
                 <?
             }
         ?>
         </select>
-        <input type="button"  class="btn" value="Отфильтровать"> </input>
 
+        <input type="submit"  class="btn" value="Отфильтровать"> </input>
+        </form>
 
         <?php
-            $query = "SELECT id, fio_pacienta FROM `Palata` WHERE doljnost = '$row[Должность]' ORDER BY id DESC LIMIT 10 "
+        error_reporting(0);
+            $doljnost = $_POST['doljnost'];
+            echo $_POST['doljnost']."<br>";
+
+            $query = "SELECT fio_pacienta FROM `Palata` WHERE doljnost = '$doljnost' ORDER BY id DESC LIMIT 10 ";
+
+            $resulta = mysqli_query($link, $query);
+            $fetch_all = mysqli_fetch_all($resulta);
+//            var_dump($query).'<br>';
+//            var_dump($fetch_all)."<br>";
+//            echo $fetch_all."<br>";
+
 
 
         ?>
+        <table border="1">
+
+            <?php
+            foreach ( $resulta as $array_name => $array_value ) {
+//                echo "dfg";
+                echo "<br>";
+//                echo "<td>";
+                foreach ( $array_value as $index => $value ) {
+//                    echo 'aaaa';
+                      echo( $value.'</td>');
+//                    echo 'bbbb';
+//                    echo '<br>';
+                }
+//                echo '<br>';
+
+            }?>
+
+
+        </table>
 
 
 <!--<pre>-->
