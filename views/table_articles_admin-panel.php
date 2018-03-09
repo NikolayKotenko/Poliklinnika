@@ -6,9 +6,17 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
      <style>
-         html, body { font-size: 8pt; }
-         th, table {text-align: center;}
-         td { padding: 5px;}
+         html, body {
+             font-size: 8pt;
+         }
+
+         th, table {
+             text-align: center;
+         }
+
+         th, td {
+             padding: 5px;
+         }
     </style>
 </head>
 <body>
@@ -73,9 +81,6 @@
         </table>
 
     </div>
-    <footer>
-        <p>Мой первый блог<br>Copyright &copy; 2015</p>
-    </footer>
 </div>
 </body>
 </html>
