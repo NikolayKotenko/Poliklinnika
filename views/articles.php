@@ -15,22 +15,106 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../source/style.css">
+    <link rel="stylesheet" href="../source/bootstrap.min.css">
     <style>
         th, table {
-            text-align: center; }
+            text-align: center; font-size: 10pt}
         th, td {
             padding: 5px;  }
     </style>
 </head>
 <body>
 
-<!--Отчет первый, 10 пациентов которые чаще всего обращаются к врачам -->
+<!--Отчет первый, поле Жалоба, среднее число пациентов по каждому врачу-->
 <div class="container">
     <br><br>
     <a class="btn btn-primary" href="../admin-panel/index.php">Сводная таблица</a> <!-- Ссылка именно на index.php потому что в начале
     мы сформировали таблицу статей, потом инклюдили файл table_articles_admin-panel.php в котором отображали все -->
+
+    <div>
+        <br><br>
+        <h4 class="">Отчёт №1</h4>
+        <label>Отчет первый, поле Жалоба, среднее число пациентов по каждому врачу</label>
+        <br>
+        <form action="" method="post">
+            <select name="jaloba" id="jaloba" onchange="document.getElementById('spisok_10_pacietnov').value=value">
+                <option value="0">Выберите Жалобу пациента</option>
+                <?php
+                $query_distinct_jaloba = "SELECT DISTINCT `Jaloba` FROM `Jalobi_pacientov`";
+                $distinct_jaloba = mysqli_query($link, $query_distinct_jaloba);
+
+                while($row = mysqli_fetch_assoc($distinct_jaloba)){
+                    ?>
+                    <option value="<?=$row['Jaloba']?>"><?=$row['Jaloba']?></option>
+                    <?
+                }
+                ?>
+            </select>
+            <input type="submit"  class="btn" value="Отфильтровать"> </input>
+        </form>
+
+        <?php
+        error_reporting(0);
+        $jaloba = $_POST['jaloba'];
+        echo "Жалоба пациентов по фильтру = ".$_POST['jaloba']."<br>"."<br>";
+
+        $query = "SELECT fio_pacienta, fio_vracha_na_kotorogo_jalovalis FROM `Jalobi_pacientov` WHERE Jaloba = '$jaloba' ORDER BY id DESC LIMIT 10 ";
+
+        $result = mysqli_query($link, $query);
+        $fetch_all = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        //            var_dump($query).'<br>';
+                    var_dump($fetch_all)."<br>";
+        //            echo $fetch_all."<br>";
+        ?>
+
+        <table border="1">
+                <tr>
+                    <th>Количество пациентов в месяц</th>
+                    <th>ФИО кто лечил</th>
+                </tr>
+
+            <?php
+//            foreach ( $result as $array_name => $array_value ) {
+//                foreach ( $array_value as $index => $value ) {
+                foreach ($fetch_all as $value) {
+                    echo '
+                        <tr>
+                          <td>'.count($value['fio_pacienta']).'<br></td>
+                          <td>'.$value['fio_vracha_na_kotorogo_jalovalis'].'<br></td>
+                        </tr>
+                        ';
+                }
+            ?>
+        </table>
+
+
+        <!--<pre>-->
+        <!--       --><?php
+        //        foreach ( articles_all($link) as $array_name => $array_value ) {
+        //            print_r($array_value); // отладка
+        //            print("<b>".$array_name."</b><br>");
+        //
+        //            foreach ( $array_value as $index => $value )
+        //            {
+        //            print("".$array_name." => ".$index." => ".$value."<br>");
+        //            if ($value == $_GET['id'])
+        //            echo $array_id = $array_value;
+        //            }
+        //        }
+        //        ?>
+        <!--</pre>-->
+
+
+
+    </div>
+    <footer>
+    </footer>
+</div>
+
+<!--Отчет второй, 10 пациентов которые чаще всего обращаются к врачам -->
+<div class="container">
+    <br><br>
     <div>
         <br><br>
         <h4 class="">Отчёт №2</h4>

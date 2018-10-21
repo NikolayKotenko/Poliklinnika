@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Мой первый блог</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../source/style.css">
+    <link rel="stylesheet" href="../source/bootstrap.min.css">
 </head>
 <body>
 <div class="container">

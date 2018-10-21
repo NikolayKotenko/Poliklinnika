@@ -17,7 +17,8 @@ Simptom.simptom AS 'Симптом',
 Palata.data_postuplenia AS 'Дата поступления',
 Palata.data_vipiski AS 'Дата выписки',
 allergia_k_preparatam.alergia_k_preparatam AS 'Аллергия к препаратам',
-Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты'
+Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты',
+Jalobi_pacientov.Jaloba AS 'Жалобы пациентов'
 
 FROM
 FIO_pacienta
@@ -31,6 +32,7 @@ JOIN Diagnoz ON FIO_pacienta.fio_pacienta = Diagnoz.fio_pacienta
 JOIN Simptom ON FIO_pacienta.fio_pacienta = Simptom.fio_pacienta
 JOIN allergia_k_preparatam ON FIO_pacienta.fio_pacienta = allergia_k_preparatam.fio_pacienta
 JOIN Naznachenie_preparati ON FIO_pacienta.fio_pacienta = Naznachenie_preparati.fio_pacienta
+JOIN Jalobi_pacientov ON FIO_pacienta.fio_pacienta = Jalobi_pacientov.fio_pacienta
 ORDER BY `id` ASC";
 /* Выбрать все колонки из таблицы articles и
 отсортировать по колонке id в убывающем порядке. * - обозначается все колонки */
@@ -67,7 +69,8 @@ Simptom.simptom AS 'Симптом',
 Palata.data_postuplenia AS 'Дата поступления',
 Palata.data_vipiski AS 'Дата выписки',
 allergia_k_preparatam.alergia_k_preparatam AS 'Аллергия к препаратам',
-Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты'
+Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты',
+Jalobi_pacientov.Jaloba AS 'Жалобы пациентов'
 
 FROM
 FIO_pacienta
@@ -81,6 +84,7 @@ JOIN Diagnoz ON FIO_pacienta.fio_pacienta = Diagnoz.fio_pacienta
 JOIN Simptom ON FIO_pacienta.fio_pacienta = Simptom.fio_pacienta
 JOIN allergia_k_preparatam ON FIO_pacienta.fio_pacienta = allergia_k_preparatam.fio_pacienta
 JOIN Naznachenie_preparati ON FIO_pacienta.fio_pacienta = Naznachenie_preparati.fio_pacienta
+JOIN Jalobi_pacientov ON FIO_pacienta.fio_pacienta = Jalobi_pacientov.fio_pacienta
 ORDER BY `id` ASC";
 /* Выбрать все колонки из таблицы articles и
 отсортировать по колонке id в убывающем порядке. * - обозначается все колонки */
@@ -118,7 +122,8 @@ return $result; /* возвращаем результат в название �
     Palata.data_postuplenia AS 'Дата поступления',
     Palata.data_vipiski AS 'Дата выписки',
     allergia_k_preparatam.alergia_k_preparatam AS 'Аллергия к препаратам',
-    Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты'
+    Naznachenie_preparati.naznachenie_preparati AS 'Назначенные препараты',
+    Jalobi_pacientov.Jaloba AS 'Жалобы пациентов'
     
     FROM
     FIO_pacienta
@@ -132,6 +137,7 @@ return $result; /* возвращаем результат в название �
     JOIN Simptom ON FIO_pacienta.fio_pacienta = Simptom.fio_pacienta
     JOIN allergia_k_preparatam ON FIO_pacienta.fio_pacienta = allergia_k_preparatam.fio_pacienta
     JOIN Naznachenie_preparati ON FIO_pacienta.fio_pacienta = Naznachenie_preparati.fio_pacienta
+    JOIN Jalobi_pacientov ON FIO_pacienta.fio_pacienta = Jalobi_pacientov.fio_pacienta
     ", (int)$id_article); /* Выборка из таблицы по всем
     столбцам из таблицы articles где id равняется входящей в параметры переменной $id_article КОТОРАЯ является
     параметром $_GET['id'] (из get_article.php) который получил идшник нужной статьи из url'a  */
@@ -148,25 +154,30 @@ return $result; /* возвращаем результат в название �
 
     /* Создание новой статьи через админку */
     function articles_new($link, $fio_pacienta, $strahovoi_polis, $pasport, $palata, $otdelenie,
-                          $fio_vracha, $doljnost, $diagnoz, $simptom, $data_postuplenia, $data_vipiski, $allergia_k_preparatam, $naznachenie_preparati){
-        for ($i=0; $i<=12; $i++) {
-            mysqli_query($link, "INSERT IGNORE INTO `FIO_pacienta`(`id`, `fio_pacienta`) VALUES (NULL,'$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `Strahovoi_polis`(`id`, `Nomer_polisa`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$strahovoi_polis', '$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `Pasport`(`id`, `nomer_pasporta`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$pasport', '$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `Palata`(`id`, `nomer_palati`, `fio_pacienta`, `fio_vracha`, `doljnost`, `data_postuplenia`, `data_vipiski`)
-                                                    VALUES (LAST_INSERT_ID(),'$palata', '$fio_pacienta', '$fio_vracha', '$doljnost', '$data_postuplenia', '$data_vipiski')");
-            mysqli_query($link, "INSERT IGNORE INTO `Otdelenie`(`id`, `nazvanie_otdelenia_specialnost`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$otdelenie', '$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `fio_vracha`(`id`, `fio_vracha`, `nazvanie_otdelenia_specialnost`) VALUES (LAST_INSERT_ID(),'$fio_vracha','$otdelenie')");
-            mysqli_query($link, "INSERT IGNORE INTO `Diagnoz`(`id`, `diagnoz`, `fio_pacienta`, `fio_vracha_postavivshego_diagnoz`) 
-                                        VALUES (LAST_INSERT_ID(),'$diagnoz','$fio_pacienta','$fio_vracha')");
-            mysqli_query($link, "INSERT IGNORE INTO `Simptom`(`id`, `simptom`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$simptom','$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `data_postuplenia`(`id`, `data_postuplenia`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$data_postuplenia','$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `data_vipiski`(`id`, `data_vipiski`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$data_vipiski','$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `allergia_k_preparatam`(`id`, `alergia_k_preparatam`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$allergia_k_preparatam','$fio_pacienta')");
-            mysqli_query($link, "INSERT IGNORE INTO `Naznachenie_preparati`(`id`, `naznachenie_preparati`, `fio_pacienta`, `fio_vracha_naznachivzhego_preparati`) 
-                                                  VALUES (LAST_INSERT_ID(),'$naznachenie_preparati','$fio_pacienta','$fio_vracha')");
-        }
-        return mysqli_affected_rows($link); /* Если все гуд, возвращаем кол-во статей которое было успешно отредактировано */
+                          $fio_vracha, $doljnost, $diagnoz, $simptom, $data_postuplenia, $data_vipiski, $allergia_k_preparatam, $naznachenie_preparati, $jalobi_pacientov){
+//        for ($i=0; $i<=15; $i++) {
+            mysqli_query($link, "INSERT INTO `FIO_pacienta`(`id`, `fio_pacienta`) VALUES (NULL,'$fio_pacienta')");
+            mysqli_query($link, "INSERT INTO `Strahovoi_polis`(`id`, `Nomer_polisa`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$strahovoi_polis', '$fio_pacienta')");
+            mysqli_query($link, "INSERT INTO `Pasport`(`id`, `nomer_pasporta`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$pasport', '$fio_pacienta')");
+            mysqli_query($link, "INSERT INTO `Otdelenie`(`id`, `nazvanie_otdelenia_specialnost`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$otdelenie', '$fio_pacienta')");
+            mysqli_query($link, "INSERT INTO `fio_vracha`(`id`, `fio_vracha`, `nazvanie_otdelenia_specialnost`) 
+                                                                      VALUES (LAST_INSERT_ID(),'$fio_vracha','$otdelenie')");
+            mysqli_query($link, "INSERT INTO `Diagnoz`(`id`, `diagnoz`, `fio_pacienta`, `fio_vracha_postavivshego_diagnoz`)
+                                                    VALUES (LAST_INSERT_ID(),'$diagnoz','$fio_pacienta','$fio_vracha')");
+            mysqli_query($link, "INSERT INTO `Simptom`(`id`, `simptom`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$simptom','$fio_pacienta')");
+            mysqli_query($link, "INSERT INTO `data_postuplenia`(`id`, `data_postuplenia`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$data_postuplenia','$fio_pacienta')");
+            mysqli_query($link, "INSERT INTO `data_vipiski`(`id`, `data_vipiski`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$data_vipiski','$fio_pacienta')");
+            mysqli_query($link, "INSERT INTO `allergia_k_preparatam`(`id`, `alergia_k_preparatam`, `fio_pacienta`) VALUES (LAST_INSERT_ID(),'$allergia_k_preparatam','$fio_pacienta')");
+            mysqli_query($link, "INSERT INTO `Naznachenie_preparati`(`id`, `naznachenie_preparati`, `fio_pacienta`, `fio_vracha_naznachivzhego_preparati`) 
+                                                              VALUES (LAST_INSERT_ID(),'$naznachenie_preparati','$fio_pacienta','$fio_vracha')");
+            mysqli_query($link, "INSERT INTO `Jalobi_pacientov`(`id`, `fio_pacienta`, `fio_vracha_na_kotorogo_jalovalis`, `Jaloba`) 
+                                                              VALUES (LAST_INSERT_ID(),'$fio_pacienta','$fio_vracha', '$jalobi_pacientov')");
+            mysqli_query($link, "INSERT INTO `Palata`(`id`, `nomer_palati`, `fio_pacienta`, `fio_vracha`, `data_postuplenia`, `data_vipiski`, `doljnost`)
+                                                    VALUES (LAST_INSERT_ID(),'$palata', '$fio_pacienta', '$fio_vracha', '$data_postuplenia', '$data_vipiski', '$doljnost')");
+
+//        }
+
+//        return mysqli_affected_rows($link); /* Если все гуд, возвращаем кол-во статей которое было успешно отредактировано */
     }
 
     /* Обновляет содержимое уже существующей статьи */
@@ -174,7 +185,7 @@ return $result; /* возвращаем результат в название �
 
         $fio = $_POST['fio_pacienta'];
 
-        for ($i=0; $i<=13; $i++) {
+//        for ($i=0; $i<=13; $i++) {
             mysqli_query($link,"UPDATE FIO_pacienta SET fio_pacienta='$fio' WHERE id='$_GET[id]'");
             mysqli_query($link,"UPDATE Strahovoi_polis SET Nomer_polisa='$_POST[strahovoi_polis]' WHERE fio_pacienta='$fio'");
             mysqli_query($link,"UPDATE Pasport SET nomer_pasporta='$_POST[Паспорт]' WHERE fio_pacienta='$fio'");
@@ -188,7 +199,8 @@ return $result; /* возвращаем результат в название �
             mysqli_query($link,"UPDATE data_vipiski SET data_vipiski='$_POST[Дата_выписки]' WHERE fio_pacienta='$fio'");
             mysqli_query($link,"UPDATE allergia_k_preparatam SET alergia_k_preparatam='$_POST[Аллергия_к_препаратам]' WHERE fio_pacienta='$fio'");
             mysqli_query($link,"UPDATE Naznachenie_preparati SET naznachenie_preparati='$_POST[Назначенные_препараты]' WHERE fio_pacienta='$fio'");
-        }
+            mysqli_query($link,"UPDATE Jalobi_pacientov SET Jaloba='$_POST[Жалобы_пациентов]' WHERE fio_pacienta='$fio'");
+//        }
 
 
     return mysqli_affected_rows($link); /* Если все гуд, возвращаем кол-во статей которое было успешно отредактировано */
@@ -216,8 +228,8 @@ return $result; /* возвращаем результат в название �
     }
 
     /*Обрезка статей на главной странице не больше 500 символов */
-    function articles_intro ($text, $len = 500) /* $text - сам текст, $len - желаемая длинна */
-    {
-    return mb_substr($text, 0, $len); /* функция multibyte substr - копирует $text начиная с 0 позиции длинной $len */
-    }
+//    function articles_intro ($text, $len = 500) /* $text - сам текст, $len - желаемая длинна */
+//    {
+//    return mb_substr($text, 0, $len); /* функция multibyte substr - копирует $text начиная с 0 позиции длинной $len */
+//    }
     ?>

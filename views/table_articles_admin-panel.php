@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Мой первый блог</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../source/style.css">
+    <link rel="stylesheet" href="../source/bootstrap.min.css">
      <style>
          html, body {
              font-size: 8pt;
@@ -21,11 +21,15 @@
 </head>
 <body>
 <div class="container">
-    <h1>Мой первый бложик</h1>
-    <div>
-<!--        <pre>-->
-<!--        --><?php //print_r($articles_table)  ?>
-<!--        </pre>-->
+    <h1>Разработка базы данных для предметной области <br> «Поликлиника»</h1>
+    <div class="main_div">
+
+        <pre>
+                    <?php print_r(articles_all($link))  ?>
+                    <?php print_r(articles_all_not_fetch($link))  ?>
+                    <?php print_r(mysqli_affected_rows($link))  ?>
+        </pre>
+
         <a href="../views/form_add_new_article_admin-panel.php?action=add">Добавить статью</a> <!-- Ссылка скрытого пула) в файле admin-panel
         /index.php в обработке добавления статей - header("Location: index.php") - грубо говоря спец лейбл с параметром add -->
         <a href="../index.php">Главная страница со статьями</a>
@@ -44,6 +48,7 @@
                 <th>Дата выписки</th>
                 <th>Аллергия к препаратам</th>
                 <th>Назначенные препараты</th>
+                <th>Жалобы пациентов (ключевое слово)</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -61,10 +66,11 @@
                 <td><?=$a['Должность']?></td>
                 <td><?=$a['Диагноз']?></td>
                 <td><?=$a['Симптом']?></td>
-                <td><?php echo DateTime::createFromFormat('Y-m-d',$a['Дата поступления'])->format('d/m/Y');?></td>
-                <td><?php echo DateTime::createFromFormat('Y-m-d',$a['Дата выписки'])->format('d/m/Y');?></td>
+                <td><?=DateTime::createFromFormat('Y-m-d',$a['Дата поступления'])->format('d/m/Y');?></td>
+                <td><?=DateTime::createFromFormat('Y-m-d',$a['Дата выписки'])->format('d/m/Y');?></td>
                 <td><?=$a['Аллергия к препаратам']?></td>
                 <td><?=$a['Назначенные препараты']?></td>
+                <td><?=$a['Жалобы пациентов']?></td>
 
                <td><a href="../admin-panel/index.php?action=edit&id=<?=$a['id']?>">Редактировать</a> <!-- будем редактировать статью
                     через параметр action=edit где id это идшник нашей статьи -->
@@ -81,6 +87,7 @@
         </table>
 
     </div>
+    <br><br><br><br>
 </div>
 </body>
 </html>
